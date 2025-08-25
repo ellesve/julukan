@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Julukan Bby</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Verdana', 'Arial', sans-serif;
+    background-color: #ffe6f0;
+    overflow: hidden;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    text-align: center;
+  }
+
+  #title {
+    font-size: 40px;
+    font-weight: bold;
+    color: #000000; /* judul hitam */
+    margin-bottom: 20px;
+    z-index: 10;
+  }
+
+  button {
+    padding: 20px 50px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 15px;
+    background-color: #ff69b4;
+    border: none;
+    color: white;
+    transition: transform 0.2s, background 0.3s;
+    z-index: 10;
+  }
+  button:hover { transform: scale(1.1); background: #ff80bf; }
+
+  #nickname {
+    margin-top: 20px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #000000; /* hasil kombinasi hitam */
+    min-height: 50px;
+    z-index: 10;
+    position: relative;
+  }
+
+  .floating-heart {
+    position: absolute;
+    font-size: 25px;
+    user-select: none;
+    pointer-events: none;
+    animation: floatUp 8s linear infinite;
+    z-index: 1;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(100vh); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+  }
+
+  .heart-cursor {
+    position: fixed;
+    font-size: 32px;
+    color: #ff4da6;
+    pointer-events: none;
+    user-select: none;
+    z-index: 20;
+    transition: transform 0.1s linear;
+  }
+
+  /* Flash putih pas klik */
+  .flash {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:#fff;
+    opacity:0;
+    pointer-events:none;
+    z-index:50;
+  }
+</style>
+</head>
+<body>
+<div id="title">Julukan Bby 💖</div>
+<button onclick="generateNickname()">Click sini bby</button>
+<div id="nickname"></div>
+<div class="flash" id="flash"></div>
+
+<script>
+  const words = ["jilat","sayang","sange","cinta","baby","riza","elle","love","jambak","tarik","cium","peluk","hamil","basah","bibir","nafsu","nikah","cakep","manis","etot","grepe","kiss","hirup","gigit","elus","cubit"];
+
+  function generateNickname() {
+    // Flash animasi
+    const flash = document.getElementById("flash");
+    flash.style.opacity = "1";
+    setTimeout(()=> flash.style.opacity = "0", 150);
+
+    // ambil 2 kata random
+    const w1 = words[Math.floor(Math.random() * words.length)];
+    const w2 = words[Math.floor(Math.random() * words.length)];
+    const short1 = w1.slice(0,2);
+    const short2 = w2.slice(0,3);
+    const nickname = short1 + short2;
+
+    document.getElementById('nickname').innerText = `${nickname} = ${w1} + ${w2}`;
+  }
+
+  // Floating love dari bawah
+  const colors = ["#ffb3c6","#ff99cc","#ffb3e6","#ffcce6","#ffd1f0","#ffccff","#ffb6c1","#ffdee6"];
+  function createHeart(){
+    const span = document.createElement('div');
+    span.className='floating-heart';
+    span.innerText='💖';
+    span.style.left=Math.random()*100+'vw';
+    span.style.fontSize=(15+Math.random()*15)+'px';
+    span.style.color=colors[Math.floor(Math.random()*colors.length)];
+    span.style.animationDuration=(6+Math.random()*6)+'s';
+    document.body.appendChild(span);
+    setTimeout(()=>span.remove(),12000);
+  }
+  setInterval(createHeart,400);
+</script>
+</body>
+</html>
