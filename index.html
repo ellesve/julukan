@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Julukan Bby</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Verdana', 'Arial', sans-serif;
+    background-color: #ffe6f0;
+    overflow: hidden;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    text-align: center;
+  }
+
+  #title {
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 20px;
+    z-index: 10;
+  }
+
+  button {
+    padding: 20px 50px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 15px;
+    background-color: #ff69b4;
+    border: none;
+    color: white;
+    transition: transform 0.2s, background 0.3s;
+    z-index: 10;
+  }
+  button:hover { transform: scale(1.1); background: #ff80bf; }
+
+  #nickname {
+    margin-top: 20px;
+    font-size: 36px;
+    font-weight: bold;
+    min-height: 50px;
+    z-index: 10;
+    position: relative;
+  }
+
+  .floating-heart {
+    position: absolute;
+    font-size: 25px;
+    user-select: none;
+    pointer-events: none;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    z-index: 1;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(100vh); }
+    100% { transform: translateY(-10vh); }
+  }
+
+  @keyframes blink {
+    0%,50%,100% {opacity:0.2;}
+    25%,75% {opacity:0.5;}
+  }
+</style>
+</head>
+<body>
+<div id="title">Julukan Bby 💖</div>
+<button onclick="generateNickname()">Click sini bby</button>
+<div id="nickname"></div>
+
+<script>
+  const words = ["jilat","sayang","sange","cinta","baby","riza","elle","love","jambak","tarik","cium","peluk","hamil","basah","bibir","nafsu","nikah","cakep","manis","etot","grepe"];
+  const bonusWords = ["kiss","hirup","gigit","elus","cubit"];
+  const allWords = words.concat(bonusWords);
+
+  const colors = ["#ff6666","#ff9933","#ffcc33","#66cc66","#33ccff","#6666ff","#cc66ff","#ffcc66","#66ffff","#ccff66"];
+
+  function getRandomColor() {
+    return colors[Math.floor(Math.random()*colors.length)];
+  }
+
+  function generateNickname() {
+    // Flash putih cepat saat diklik
+    document.body.style.backgroundColor = '#ffffff';
+    setTimeout(() => document.body.style.backgroundColor = '#ffe6f0', 100);
+
+    const w1 = allWords[Math.floor(Math.random() * allWords.length)];
+    const w2 = allWords[Math.floor(Math.random() * allWords.length)];
+    const short1 = w1.slice(0,2);
+    const short2 = w2.slice(0,3);
+    const nickname = short1 + short2;
+
+    // Semua teks berubah warna
+    const colorNickname = getRandomColor();
+    const colorW1 = getRandomColor();
+    const colorW2 = getRandomColor();
+
+    document.getElementById('nickname').innerHTML =
+      `<span style="color:${colorNickname}">${nickname}</span> = <span style="color:${colorW1}">${w1}</span> + <span style="color:${colorW2}">${w2}</span>`;
+  }
+
+  // Floating hearts dari bawah
+  const heartColors = ["#ffb3c6","#ff99cc","#ffb3e6","#ffcce6","#ffd1f0","#ffccff","#ffb6c1","#ffdee6"];
+  const totalBg = 30;
+  for(let i=0;i<totalBg;i++){
+    const span = document.createElement('div');
+    span.className='floating-heart';
+    span.innerText='💖';
+    span.style.left = Math.random()*100+'vw';
+    span.style.fontSize = (15 + Math.random()*15)+'px';
+    span.style.color = heartColors[Math.floor(Math.random()*heartColors.length)];
+    span.style.pointerEvents = 'none';
+    span.style.animationName = 'floatUp, blink';
+    span.style.animationDuration = (4 + Math.random()*4)+'s, 1.5s'; // lebih cepat
+    document.body.appendChild(span);
+  }
+</script>
+</body>
+</html>
